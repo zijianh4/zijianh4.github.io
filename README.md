@@ -1,1 +1,1 @@
-This is the source code to Jon Barron's public academic website: https://jonbarron.info/. Feel free to clone this code for your own personal use.
+This is Zijian Huang's homepage, which uses the template from Jon Barron's public academic website: https://jonbarron.info/. Feel free to clone this code for your own personal use.
