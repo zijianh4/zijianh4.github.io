@@ -247,12 +247,12 @@ body > table > tbody > tr > td > table:first-of-type td:last-child {
 }
 
 .social-links svg {
-  width: 18px !important;
-  height: 18px !important;
-  max-width: 18px;
-  max-height: 18px;
+  width: 22px !important;
+  height: 22px !important;
+  max-width: 22px;
+  max-height: 22px;
   fill: currentColor;
-  flex: 0 0 18px;
+  flex: 0 0 22px;
 }
 
 tr:has(.publication-thumb) > td {
