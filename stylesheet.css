@@ -255,6 +255,52 @@ body > table > tbody > tr > td > table:first-of-type td:last-child {
   flex: 0 0 22px;
 }
 
+.paper-links {
+  display: flex;
+  gap: 7px;
+  margin: 8px 0 0;
+}
+
+.paper-links a {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--um-blue-mid);
+  background: #fff;
+  border: 1px solid rgba(27, 106, 168, 0.22);
+  border-radius: 50%;
+  box-shadow: 0 2px 7px rgba(0, 39, 76, 0.06);
+  transition: transform 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.paper-links a:hover,
+.paper-links a:focus {
+  color: var(--um-blue);
+  background: var(--um-maize-soft);
+  border-color: rgba(255, 203, 5, 0.95);
+  transform: translateY(-1px);
+}
+
+.paper-links svg {
+  width: 16px !important;
+  height: 16px !important;
+  max-width: 16px;
+  max-height: 16px;
+  fill: currentColor;
+  flex: 0 0 16px;
+}
+
+.paper-links img {
+  width: 16px !important;
+  height: 16px !important;
+  max-width: 16px;
+  max-height: 16px;
+  object-fit: contain;
+  flex: 0 0 16px;
+}
+
 tr:has(.publication-thumb) > td {
   background: #f9fbfe;
   border-top: 1px solid var(--rule);
