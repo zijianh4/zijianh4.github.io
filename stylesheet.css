@@ -66,17 +66,17 @@
 :root {
   --um-blue: #00274c;
   --um-blue-soft: #e8eef5;
-  --um-blue-mid: #315d86;
+  --um-blue-mid: #1b6aa8;
   --um-maize: #ffcb05;
   --um-maize-soft: #fff4bf;
-  --ink: #17212f;
+  --ink: #28313d;
   --muted: #5d6673;
   --paper: rgba(255, 255, 255, 0.94);
   --rule: #d7dee7;
 }
 
 a {
-  color: var(--um-blue);
+  color: var(--um-blue-mid);
   text-decoration: none;
   transition: color 0.15s ease, background-color 0.15s ease;
 }
@@ -146,11 +146,11 @@ hr {
 
 .papertitle {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  color: var(--um-blue);
+  color: var(--um-blue-mid);
   font-size: 15px;
   font-weight: 700;
   line-height: 1.35;
-  border-bottom: 1px solid rgba(0, 39, 76, 0.28);
+  border-bottom: 1px solid rgba(27, 106, 168, 0.35);
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
@@ -218,15 +218,38 @@ body > table > tbody > tr > td > table:first-of-type td:last-child {
   box-shadow: 0 14px 34px rgba(0, 39, 76, 0.24);
 }
 
-p[style*="text-align:center"] a {
-  display: inline-block;
-  margin: 3px 1px;
-  padding: 2px 4px;
-  border-radius: 4px;
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 18px 0 4px;
 }
 
-p[style*="text-align:center"] a:hover {
+.social-links a {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--um-blue);
+  background: #fff;
+  border: 1px solid rgba(0, 39, 76, 0.16);
+  border-radius: 50%;
+  box-shadow: 0 3px 10px rgba(0, 39, 76, 0.08);
+}
+
+.social-links a:hover,
+.social-links a:focus {
+  color: var(--um-blue);
   background: var(--um-maize-soft);
+  border-color: rgba(255, 203, 5, 0.95);
+  transform: translateY(-1px);
+}
+
+.social-links svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
 }
 
 tr:has(.publication-thumb) > td {
