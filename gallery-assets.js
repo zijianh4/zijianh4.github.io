@@ -19,6 +19,7 @@ window.galleryAssets = [
   { type: "image", src: "gallery/web/IMG_4169.jpg" },
   { type: "image", src: "gallery/web/IMG_1561.jpg" },
   { type: "image", src: "gallery/web/IMG_3101.jpg" },
+  { type: "video", src: "gallery/web/IMG_3494.mp4" },
   { type: "image", src: "gallery/web/IMG_1177.jpg" },
   { type: "image", src: "gallery/web/IMG_5172.jpg" },
   { type: "image", src: "gallery/web/IMG_0219.jpg" },
