@@ -1,0 +1,14 @@
+.DS_Store
+gallery/.DS_Store
+gallery/*.HEIC
+gallery/*.heic
+gallery/*.JPG
+gallery/*.JPEG
+gallery/*.jpg
+gallery/*.jpeg
+gallery/*.MOV
+gallery/*.mov
+gallery/web/IMG_3494
+!gallery/web/
+!gallery/web/*.jpg
+!gallery/web/*.mp4

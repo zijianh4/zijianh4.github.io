@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Gallery | Zijian Huang</title>
+    <meta name="author" content="Zijian Huang">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon/umich-favicon-512.png" type="image/png" sizes="512x512">
+    <link rel="icon" href="images/favicon/umich-favicon-192.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="images/favicon/umich-favicon-192.png">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  </head>
+
+  <body class="gallery-page">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="site-nav-link" href="index.html">Home</a>
+      <a class="site-nav-link active" href="gallery.html">Gallery</a>
+    </nav>
+
+    <main class="gallery-shell">
+      <header class="gallery-header">
+        <h1>Gallery</h1>
+      </header>
+      <section class="gallery-grid" id="galleryGrid" aria-label="Photo and video gallery"></section>
+    </main>
+
+    <script src="gallery-assets.js"></script>
+    <script>
+      const grid = document.getElementById("galleryGrid");
+      const assets = window.galleryAssets || [];
+      let renderedColumnCount = 0;
+      let renderGeneration = 0;
+
+      function getColumnCount() {
+        if (window.innerWidth <= 700) return 2;
+        if (window.innerWidth <= 1000) return 3;
+        if (window.innerWidth <= 1250) return 4;
+        return 5;
+      }
+
+      function createItem(asset, index) {
+        const item = document.createElement(asset.type === "video" ? "div" : "a");
+        item.className = `gallery-item gallery-item-${index % 11}`;
+        let media;
+
+        if (asset.type === "video") {
+          media = document.createElement("video");
+          media.src = asset.src;
+          media.autoplay = true;
+          media.loop = true;
+          media.muted = true;
+          media.playsInline = true;
+          media.controls = true;
+          media.preload = "metadata";
+        } else {
+          item.href = asset.src;
+          item.setAttribute("aria-label", "Open gallery photo");
+
+          media = document.createElement("img");
+          media.src = asset.src;
+          media.alt = "";
+          media.decoding = "async";
+        }
+
+        item.appendChild(media);
+        return { item, media };
+      }
+
+      function waitForMedia(media) {
+        if (media.tagName === "IMG") {
+          if (media.complete) return Promise.resolve();
+          if (media.decode) return media.decode().catch(() => {});
+          return new Promise((resolve) => {
+            media.addEventListener("load", resolve, { once: true });
+            media.addEventListener("error", resolve, { once: true });
+          });
+        }
+
+        if (media.readyState >= 1) return Promise.resolve();
+        return new Promise((resolve) => {
+          media.addEventListener("loadedmetadata", resolve, { once: true });
+          media.addEventListener("error", resolve, { once: true });
+        });
+      }
+
+      function shortestColumn(columns) {
+        return columns.reduce((shortest, column) => {
+          return column.offsetHeight < shortest.offsetHeight ? column : shortest;
+        }, columns[0]);
+      }
+
+      async function renderGallery() {
+        const columnCount = getColumnCount();
+        if (columnCount === renderedColumnCount && grid.children.length) return;
+
+        renderGeneration += 1;
+        const generation = renderGeneration;
+        renderedColumnCount = columnCount;
+        grid.replaceChildren();
+
+        const columns = Array.from({ length: columnCount }, () => {
+          const column = document.createElement("div");
+          column.className = "gallery-column";
+          grid.appendChild(column);
+          return column;
+        });
+
+        for (const [index, asset] of assets.entries()) {
+          if (generation !== renderGeneration) return;
+
+          const { item, media } = createItem(asset, index);
+          const column = shortestColumn(columns);
+          column.appendChild(item);
+          await waitForMedia(media);
+        }
+      }
+
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(renderGallery, 160);
+      });
+
+      renderGallery();
+    </script>
+  </body>
+</html>
