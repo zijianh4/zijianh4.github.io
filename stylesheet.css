@@ -390,9 +390,14 @@ span.highlight {
   z-index: 1;
 }
 
-.publication-thumb-placeholder {
-  background: transparent;
+.publication-thumb.publication-thumb-placeholder {
+  background: transparent !important;
   border-color: transparent;
+  box-shadow: none;
+}
+
+.publication-thumb.publication-thumb-placeholder:hover {
+  transform: none;
   box-shadow: none;
 }
 
