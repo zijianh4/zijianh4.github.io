@@ -42,5 +42,13 @@ window.galleryAssets = [
   { type: "image", src: "gallery/web/DSC08774.jpg" },
   { type: "image", src: "gallery/web/IMG_1990.jpg" },
   { type: "image", src: "gallery/web/IMG_8031.jpg" },
-  { type: "image", src: "gallery/web/IMG_6253.jpg" }
+  { type: "image", src: "gallery/web/IMG_6253.jpg" },
+  { type: "image", src: "gallery/web/DJI_20260629135120_0019_D.jpg" },
+  { type: "image", src: "gallery/web/IMG_6675.jpg" },
+  { type: "image", src: "gallery/web/IMG_6691.jpg" },
+  { type: "image", src: "gallery/web/IMG_8310.jpg" },
+  { type: "image", src: "gallery/web/IMG_8400.jpg" },
+  { type: "image", src: "gallery/web/IMG_8452.jpg" },
+  { type: "image", src: "gallery/web/IMG_8699.jpg" },
+  { type: "image", src: "gallery/web/IMG_9212.jpg" }
 ];
