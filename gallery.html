@@ -25,12 +25,21 @@
       <section class="gallery-grid" id="galleryGrid" aria-label="Photo and video gallery"></section>
     </main>
 
+    <div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true">
+      <button class="gallery-lightbox-close" type="button" aria-label="Close enlarged photo">X</button>
+      <img class="gallery-lightbox-image" id="galleryLightboxImage" alt="">
+    </div>
+
     <script src="gallery-assets.js"></script>
     <script>
       const grid = document.getElementById("galleryGrid");
+      const lightbox = document.getElementById("galleryLightbox");
+      const lightboxImage = document.getElementById("galleryLightboxImage");
+      const lightboxClose = lightbox.querySelector(".gallery-lightbox-close");
       const assets = window.galleryAssets || [];
       let renderedColumnCount = 0;
       let renderGeneration = 0;
+      let lightboxReturnTarget = null;
 
       function getColumnCount() {
         if (window.innerWidth <= 700) return 2;
@@ -55,7 +64,11 @@
           media.preload = "metadata";
         } else {
           item.href = asset.src;
-          item.setAttribute("aria-label", "Open gallery photo");
+          item.setAttribute("aria-label", "Enlarge gallery photo");
+          item.addEventListener("click", (event) => {
+            event.preventDefault();
+            openLightbox(asset.src, item);
+          });
 
           media = document.createElement("img");
           media.src = asset.src;
@@ -90,6 +103,29 @@
         }, columns[0]);
       }
 
+      function openLightbox(src, returnTarget) {
+        lightboxReturnTarget = returnTarget;
+        lightboxImage.src = src;
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("lightbox-open");
+        lightboxClose.focus();
+      }
+
+      function closeLightbox() {
+        if (!lightbox.classList.contains("is-open")) return;
+
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lightbox-open");
+        lightboxImage.removeAttribute("src");
+
+        if (lightboxReturnTarget) {
+          lightboxReturnTarget.focus();
+          lightboxReturnTarget = null;
+        }
+      }
+
       async function renderGallery() {
         const columnCount = getColumnCount();
         if (columnCount === renderedColumnCount && grid.children.length) return;
@@ -120,6 +156,16 @@
       window.addEventListener("resize", () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(renderGallery, 160);
+      });
+
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) closeLightbox();
+      });
+
+      lightboxClose.addEventListener("click", closeLightbox);
+
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeLightbox();
       });
 
       renderGallery();
