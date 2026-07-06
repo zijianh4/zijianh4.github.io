@@ -50,5 +50,8 @@ window.galleryAssets = [
   { type: "image", src: "gallery/web/IMG_8400.jpg" },
   { type: "image", src: "gallery/web/IMG_8452.jpg" },
   { type: "image", src: "gallery/web/IMG_8699.jpg" },
-  { type: "image", src: "gallery/web/IMG_9212.jpg" }
+  { type: "image", src: "gallery/web/IMG_9212.jpg" },
+  { type: "image", src: "gallery/web/IMG_6254.jpg" },
+  { type: "video", src: "gallery/web/IMG_6505.mp4" },
+  { type: "video", src: "gallery/web/IMG_7644.mp4" }
 ];
